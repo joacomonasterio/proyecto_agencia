@@ -1,6 +1,14 @@
 import './App.css'
+import { useState, useEffect } from 'react'
 
 export default function App() {
+  const [scrollY, setScrollY] = useState(0)
+
+    useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
   const services = [
     {
       title: 'UX/UI Design',
@@ -13,42 +21,20 @@ export default function App() {
         'Construimos landing pages y experiencias web rápidas, escalables y responsive con foco en performance y resultados.',
     },
     {
-      title: 'Desarrolo de Aplicaciones',
+      title: 'Desarrollo de Aplicaciones',
       description:
         'Unimos estrategia, diseño y desarrollo para transformar ideas en productos listos para crecer.',
-    },
+    }
   ]
-
-  const process = [
+    const process = [
     'Descubrimiento y estrategia',
     'Wireframes y diseño visual',
     'Desarrollo y optimización',
     'Entrega, medición y mejora',
-  ]
-
-  const projects = [
-    {
-      name: 'LaunchFlow',
-      type: 'Landing para startup',
-      summary:
-        'Diseño y desarrollo de una página enfocada en captar leads con una estética moderna y estructura de alta conversión.',
-    },
-    {
-      name: 'StudioPeak',
-      type: 'Web para servicio premium',
-      summary:
-        'Experiencia visual elegante para presentar servicios, generar confianza y facilitar el contacto.',
-    },
-    {
-      name: 'NovaStack',
-      type: 'Producto digital',
-      summary:
-        'Interfaz moderna con storytelling visual para comunicar valor, diferenciar marca y mejorar percepción de producto.',
-    },
-  ]
-
+    ]
+  
   return (
-    <div className="min-h-screen bg-neutral-950 text-white antialiased">
+    <div className="relative min-h-screen bg-neutral-950 text-white antialiased">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute left-[-10%] top-[-10%] h-96 w-96 rounded-full bg-fuchsia-500/20 blur-3xl" />
         <div className="absolute right-[-10%] top-[10%] h-[28rem] w-[28rem] rounded-full bg-cyan-500/20 blur-3xl" />
@@ -56,7 +42,11 @@ export default function App() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_35%)]" />
       </div>
 
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-neutral-950/70 backdrop-blur-xl">
+      <header className={`sticky top-0 z-50 border-b border-white/10 transition-all duration-300 ${
+    scrollY > 40
+    ? 'bg-neutral-950/80 backdrop-blur-xl'
+    : 'bg-transparent border-transparent'
+    }`}>
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
           <div>
             <span className="text-sm font-medium tracking-[0.22em] text-white/70 uppercase">
@@ -69,9 +59,6 @@ export default function App() {
             </a>
             <a href="#process" className="transition hover:text-white">
               Proceso
-            </a>
-            <a href="#work" className="transition hover:text-white">
-              Proyectos
             </a>
             <a href="#contact" className="transition hover:text-white">
               Contacto
@@ -121,7 +108,7 @@ export default function App() {
           <div className="mt-1 text-white/60">Implementación moderna</div>
         </div>
         <div>
-          <div className="text-2xl font-semibold">Crecimientos</div>
+          <div className="text-2xl font-semibold">Crecimiento</div>
           <div className="mt-1 text-white/60">Resultados que escalan</div>
         </div>
       </div>
@@ -143,7 +130,7 @@ export default function App() {
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-sm uppercase tracking-[0.24em] text-white/45">Servicios</p>
             <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
-              ¿Tu negocio está listo para da el siguiente paso digital?
+              ¿Tu negocio está listo para dar el siguiente paso digital?
             </h2>
           </div>
           <div className="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-3">
@@ -161,7 +148,7 @@ export default function App() {
         </section>
 
         <section id="process" className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
-          <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-center text-center lg:text-left">
             <div>
               <p className="text-sm uppercase tracking-[0.24em] text-white/45">Proceso</p>
               <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
@@ -190,8 +177,8 @@ export default function App() {
         <section id="contact" className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
           <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-8 text-center">
             <p className="text-sm uppercase tracking-[0.24em] text-white/45">Contacto</p>
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">Hablemos de tu proyecto</h2>
-            <p className="mt-4 text-white/70">Enviar email a hola@tuagencia.com o escríbeme por Whatsapp</p>
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">¿Tenés un proyecto en mente?</h2>
+            <p className="mt-4 text-white/70">Enviar email a hola@tuagencia.com o contactanos por Whatsapp</p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <a href="mailto:hola@tuagencia.com" className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-medium text-white transition hover:bg-white/20">Enviar email</a>
               <a href="https://wa.me/000000000" className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-medium text-white transition hover:bg-white/20">Abrir Whatsapp</a>
@@ -199,6 +186,17 @@ export default function App() {
           </div>
         </section>
       </main>
+      <footer className="border-t border-white/10 px-6 py-8">
+  <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-sm text-white/40 sm:flex-row">
+    <span className="font-medium tracking-[0.2em] uppercase text-white/60">Polaris</span>
+    <span>© 2025 Polaris Agency. Todos los derechos reservados.</span>
+    <div className="flex gap-6">
+      <a href="#services" className="transition hover:text-white/70">Servicios</a>
+      <a href="#process" className="transition hover:text-white/70">Proceso</a>
+      <a href="#contact" className="transition hover:text-white/70">Contacto</a>
+    </div>
+  </div>
+</footer>
     </div>
   )
 }
