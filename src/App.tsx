@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 
 export default function App() {
   const [scrollY, setScrollY] = useState(0)
-
+  const [menuOpen, setMenuOpen] = useState(false)
     useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY)
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -32,7 +32,26 @@ export default function App() {
     'Desarrollo y optimización',
     'Entrega, medición y mejora',
     ]
-  
+  const projects = [
+  {
+    name: 'FitTrack',
+    type: 'App · Fitness & Training',
+    description: 'Aplicación de seguimiento de entrenamiento y progreso fitness.',
+    image: '/fittrack.png',
+  },
+  {
+    name: 'NextDrive',
+    type: 'Plataforma · Renta de Autos',
+    description: 'Plataforma digital para la renta de vehículos con experiencia moderna.',
+    image: '/nextdrive.png',
+  },
+  {
+    name: 'Nubira',
+    type: 'Web · Estética',
+    description: 'Sitio web para estética profesional con foco en imagen de marca.',
+    image: '/nubira.png',
+  },
+]
   return (
     <div className="relative min-h-screen bg-neutral-950 text-white antialiased">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -48,11 +67,9 @@ export default function App() {
     : 'bg-transparent border-transparent'
     }`}>
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-          <div>
-            <span className="text-sm font-medium tracking-[0.22em] text-white/70 uppercase">
-              Polaris
-            </span>
-          </div>
+          <a href="#" className="text-sm font-medium tracking-[0.22em] text-white/70 uppercase hover:text-white transition">
+            Polaris
+          </a>
           <nav className="hidden gap-8 text-sm text-white/70 md:flex">
             <a href="#services" className="transition hover:text-white">
               Servicios
@@ -60,18 +77,60 @@ export default function App() {
             <a href="#process" className="transition hover:text-white">
               Proceso
             </a>
+            <a href="#work" className="transition hover:text-white">
+              Proyectos
+            </a>
             <a href="#contact" className="transition hover:text-white">
               Contacto
             </a>
           </nav>
-          <a
-            href="#contact"
-            className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white hover:text-neutral-950"
+
+          {/* BOTÓN HAMBURGUESA */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden flex flex-col gap-1.5 p-2"
+            aria-label="Menu"
           >
-            Hablemos
-          </a>
+            <span className={`block h-px w-5 bg-white transition-all duration-300 ${menuOpen ? 'translate-y-2 rotate-45' : ''}`} />
+            <span className={`block h-px w-5 bg-white transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
+            <span className={`block h-px w-5 bg-white transition-all duration-300 ${menuOpen ? '-translate-y-2 -rotate-45' : ''}`} />
+          </button>
         </div>
-      </header>
+
+{/* MENU MOBILE */}
+        {menuOpen && (
+  <div className="md:hidden absolute left-3 right-3 top-16 z-50 rounded-2xl border border-white/10 bg-neutral-900/95 backdrop-blur-xl p-2 shadow-xl">
+    {[
+      { label: 'Servicios', href: '#services' },
+      { label: 'Proceso', href: '#process' },
+      { label: 'Contacto', href: '#contact' },
+    ].map((item) => (
+        <a
+        key={item.label}
+        href={item.href}
+        onClick={() => setMenuOpen(false)}
+        className="flex items-center justify-between px-4 py-3 rounded-xl text-sm text-white/70 hover:bg-white/5 hover:text-white transition"
+      >
+        {item.label}
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2 12L12 2M12 2H5M12 2V9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </a>
+    ))}
+    <div className="mx-4 mt-1 mb-2 pt-2 border-t border-white/10">
+        <a
+        href="#contact"
+        onClick={() => setMenuOpen(false)}
+        className="block w-full text-center rounded-xl bg-white text-neutral-950 text-sm font-semibold py-2.5 transition hover:bg-white/90"
+      >
+        Comenzar proyecto
+      </a>
+    </div>
+  </div>
+)}
+  
+
+        </header>
 
       <main className="relative">
   <section className="mx-auto flex max-w-7xl justify-center px-6 pb-20 pt-24 lg:px-8 lg:pb-28 lg:pt-28">
@@ -98,20 +157,7 @@ export default function App() {
         </a>
       </div>
 
-      <div className="mx-auto mt-10 grid max-w-xl grid-cols-3 gap-6 border-t border-white/10 pt-8 text-center text-sm">
-        <div>
-          <div className="text-2xl font-semibold">Claridad</div>
-          <div className="mt-1 text-white/60">Diseño centrado en usuario</div>
-        </div>
-        <div>
-          <div className="text-2xl font-semibold">Performance</div>
-          <div className="mt-1 text-white/60">Implementación moderna</div>
-        </div>
-        <div>
-          <div className="text-2xl font-semibold">Crecimiento</div>
-          <div className="mt-1 text-white/60">Resultados que escalan</div>
-        </div>
-      </div>
+      
 
     </div>
   </section>
@@ -172,7 +218,50 @@ export default function App() {
               ))}
             </div>
           </div>
+          
         </section>
+        
+        <section id="work" className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+          <div className="mb-12">
+            <p className="text-sm uppercase tracking-[0.24em] text-white/45">Proyectos</p>
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
+              Trabajo que habla por sí solo.
+            </h2>
+          </div>
+          <div className="flex flex-col">
+            {projects.map((project, i) => (
+  <div
+    key={project.name}
+    className="grid grid-cols-2 gap-8 border-t border-white/10 py-10 last:border-b items-center group hover:bg-white/[0.02] rounded-2xl px-4 transition"
+  >
+    {/* IZQUIERDA — imagen */}
+    <div className="flex justify-center">
+      {project.image ? (
+        <img
+          src={project.image}
+          alt={project.name}
+          className="h-96 object-contain drop-shadow-2xl group-hover:scale-105 transition-transform duration-500"
+        />
+      ) : (
+        <div className="h-96 w-40 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-white/20 text-sm">
+          Sin imagen
+        </div>
+      )}
+    </div>
+
+    {/* DERECHA — info */}
+    <div className="flex flex-col gap-3">
+      <span className="text-xs text-white/30 tracking-widest uppercase">0{i + 1}</span>
+      <h3 className="text-4xl font-semibold text-white group-hover:text-fuchsia-400 transition leading-tight">
+        {project.name}
+      </h3>
+      <span className="text-xs text-white/40 uppercase tracking-widest">{project.type}</span>
+      <p className="text-sm text-white/60 leading-relaxed mt-2">{project.description}</p>
+    </div>
+  </div>
+))}
+          </div>  
+    </section>
 
         <section id="contact" className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
           <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-8 text-center">
