@@ -4,54 +4,65 @@ import { useState, useEffect } from 'react'
 export default function App() {
   const [scrollY, setScrollY] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [lang, setLang] = useState<'es' | 'en'>('es')
     useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY)
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
   const services = [
-    {
-      title: 'UX/UI Design',
-      description:
-        'Diseñamos interfaces claras, modernas y centradas en conversión para productos digitales, startups y negocios que quieren verse premium.',
-    },
-    {
-      title: 'Desarrollo Web',
-      description:
-        'Construimos landing pages y experiencias web rápidas, escalables y responsive con foco en performance y resultados.',
-    },
-    {
-      title: 'Desarrollo de Aplicaciones',
-      description:
-        'Unimos estrategia, diseño y desarrollo para transformar ideas en productos listos para crecer.',
-    }
-  ]
+  {
+    title: lang === 'es' ? 'UX/UI Design' : 'UX/UI Design',
+    description: lang === 'es'
+      ? 'Diseñamos interfaces claras, modernas y centradas en conversión para productos digitales, startups y negocios que quieren verse premium.'
+      : 'We design clear, modern interfaces focused on conversion for digital products, startups and businesses that want to look premium.',
+  },
+  {
+    title: lang === 'es' ? 'Desarrollo Web' : 'Web Development',
+    description: lang === 'es'
+      ? 'Construimos landing pages y experiencias web rápidas, escalables y responsive con foco en performance y resultados.'
+      : 'We build fast, scalable and responsive landing pages and web experiences focused on performance and results.',
+  },
+  {
+    title: lang === 'es' ? 'Desarrollo de Aplicaciones' : 'App Development',
+    description: lang === 'es'
+      ? 'Unimos estrategia, diseño y desarrollo para transformar ideas en productos listos para crecer.'
+      : 'We combine strategy, design and development to transform ideas into products ready to scale.',
+  },
+]
     const process = [
-    'Descubrimiento y estrategia',
-    'Wireframes y diseño visual',
-    'Desarrollo y optimización',
-    'Entrega, medición y mejora',
-    ]
+  lang === 'es' ? 'Descubrimiento y estrategia' : 'Discovery & strategy',
+  lang === 'es' ? 'Wireframes y diseño visual' : 'Wireframes & visual design',
+  lang === 'es' ? 'Desarrollo y optimización' : 'Development & optimization',
+  lang === 'es' ? 'Entrega, medición y mejora' : 'Delivery, measurement & improvement',
+]
   const projects = [
   {
     name: 'FitTrack',
-    type: 'App · Fitness & Training',
-    description: 'Aplicación de seguimiento de entrenamiento y progreso fitness.',
+    type: lang === 'es' ? 'App · Fitness & Training' : 'App · Fitness & Training',
+    description: lang === 'es'
+      ? 'Aplicación de seguimiento de entrenamiento y progreso fitness.'
+      : 'Fitness tracking app for workouts and progress monitoring.',
     image: '/fittrack.png',
   },
   {
     name: 'NextDrive',
-    type: 'Plataforma · Renta de Autos',
-    description: 'Plataforma digital para la renta de vehículos con experiencia moderna.',
+    type: lang === 'es' ? 'Plataforma · Renta de Autos' : 'Platform · Car Rental',
+    description: lang === 'es'
+      ? 'Plataforma digital para la renta de vehículos con experiencia moderna.'
+      : 'Digital platform for vehicle rental with a modern experience.',
     image: '/nextdrive.png',
   },
   {
     name: 'Nubira',
-    type: 'Web · Estética',
-    description: 'Sitio web para estética profesional con foco en imagen de marca.',
+    type: lang === 'es' ? 'Web · Estética' : 'Web · Beauty Salon',
+    description: lang === 'es'
+      ? 'Sitio web para estética profesional con foco en imagen de marca.'
+      : 'Website for a professional beauty salon focused on brand image.',
     image: '/nubira.png',
   },
 ]
+
   return (
     <div className="relative min-h-screen bg-neutral-950 text-white antialiased">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -71,19 +82,36 @@ export default function App() {
             Polaris
           </a>
           <nav className="hidden gap-8 text-sm text-white/70 md:flex">
-            <a href="#services" className="transition hover:text-white">
-              Servicios
-            </a>
-            <a href="#process" className="transition hover:text-white">
-              Proceso
-            </a>
-            <a href="#work" className="transition hover:text-white">
-              Proyectos
-            </a>
-            <a href="#contact" className="transition hover:text-white">
-              Contacto
-            </a>
-          </nav>
+  <a href="#services" className="transition hover:text-white">
+    {lang === 'es' ? 'Servicios' : 'Services'}
+  </a>
+  <a href="#process" className="transition hover:text-white">
+    {lang === 'es' ? 'Proceso' : 'Process'}
+  </a>
+  <a href="#work" className="transition hover:text-white">
+    {lang === 'es' ? 'Proyectos' : 'Projects'}
+  </a>
+  <a href="#contact" className="transition hover:text-white">
+    {lang === 'es' ? 'Contacto' : 'Contact'}
+  </a>
+</nav>
+
+        {/* SELECTOR DE IDIOMA */}
+        <div className="flex items-center gap-1 text-sm mr-2">
+          <button
+            onClick={() => setLang('es')}
+            className={`px-1 transition ${lang === 'es' ? 'text-white font-medium' : 'text-white/40 hover:text-white/70'}`}
+          >
+            ES
+          </button>
+          <span className="text-white/20">|</span>
+          <button
+            onClick={() => setLang('en')}
+            className={`px-1 transition ${lang === 'en' ? 'text-white font-medium' : 'text-white/40 hover:text-white/70'}`}
+          >
+            EN
+          </button>
+        </div>
 
           {/* BOTÓN HAMBURGUESA */}
           <button
@@ -137,15 +165,17 @@ export default function App() {
     <div className="mx-auto max-w-3xl text-center">
       
       <div className="mb-6 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
-        UX/UI + Desarrollo Full Stack
+        {lang === 'es' ? 'UX/UI + Desarrollo Full Stack' : 'UX/UI + Full Stack Development'}
       </div>
 
       <h1 className="mx-auto max-w-3xl text-5xl font-semibold leading-tight tracking-tight sm:text-6xl lg:text-7xl">
-        Somos Polaris.
+        {lang === 'es' ? 'Somos Polaris.' : 'We are Polaris.'}
       </h1>
 
       <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/70 sm:text-xl">
-        Agencia de desarrollo de software que diseña y construye productos digitales.
+        {lang === 'es'
+      ?     'Agencia de desarrollo de software que diseña y construye productos digitales.'
+      : 'Software agency that designs and builds digital products.'}
       </p>
 
       <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
@@ -153,7 +183,7 @@ export default function App() {
           href="#contact"
           className="rounded-full bg-white px-6 py-3 text-center text-sm font-semibold text-neutral-950 transition hover:scale-[1.02]"
         >
-          Comenzar proyecto
+          {lang === 'es' ? 'Comenzar proyecto' : 'Start a project'}
         </a>
       </div>
 
@@ -164,7 +194,9 @@ export default function App() {
 
         <section className="mx-auto max-w-7xl px-6 pb-8 lg:px-8">
           <div className="grid gap-4 rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 md:grid-cols-4">
-            {['Diseño estratégico', 'Desarrollo moderno', 'Responsive', 'Optimización visual'].map((item) => (
+            {(lang === 'es'
+  ? ['Diseño estratégico', 'Desarrollo moderno', 'Responsive', 'Optimización visual']
+  : ['Strategic design', 'Modern development', 'Responsive', 'Visual optimization']).map((item) => (
               <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-5 text-sm text-white/70">
                 {item}
               </div>
@@ -174,9 +206,11 @@ export default function App() {
 
         <section id="services" className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-sm uppercase tracking-[0.24em] text-white/45">Servicios</p>
+            <p className="text-sm uppercase tracking-[0.24em] text-white/45">{lang === 'es' ? 'Servicios' : 'Services'}</p>
             <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
-              ¿Tu negocio está listo para dar el siguiente paso digital?
+              {lang === 'es'
+  ? '¿Tu negocio está listo para dar el siguiente paso digital?'
+  : 'Is your business ready to take the next digital step?'}
             </h2>
           </div>
           <div className="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-3">
@@ -196,12 +230,16 @@ export default function App() {
         <section id="process" className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-2 lg:items-center text-center lg:text-left">
             <div>
-              <p className="text-sm uppercase tracking-[0.24em] text-white/45">Proceso</p>
+              <p className="text-sm uppercase tracking-[0.24em] text-white/45">{lang === 'es' ? 'Proceso' : 'Process'}</p>
               <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
-                Un flujo claro entre diseño, desarrollo y resultado final.
+                {lang === 'es'
+  ? 'Un flujo claro entre diseño, desarrollo y resultado final.'
+  : 'A clear flow between design, development and final result.'}
               </h2>
               <p className="mt-6 max-w-xl text-base leading-8 text-white/65">
-                Trabajamos con una lógica simple: entender el objetivo, diseñar con intención y construir una experiencia sólida, rápida y lista para destacar.
+                {lang === 'es'
+  ? 'Trabajamos con una lógica simple: entender el objetivo, diseñar con intención y construir una experiencia sólida, rápida y lista para destacar.'
+  : 'We work with a simple logic: understand the goal, design with intention and build a solid, fast experience ready to stand out.'}
               </p>
             </div>
             <div className="space-y-4">
@@ -223,9 +261,9 @@ export default function App() {
         
         <section id="work" className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
           <div className="mb-12">
-            <p className="text-sm uppercase tracking-[0.24em] text-white/45">Proyectos</p>
+            <p className="text-sm uppercase tracking-[0.24em] text-white/45">{lang === 'es' ? 'Proyectos' : 'Projects'}</p>
             <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
-              Trabajo que habla por sí solo.
+              {lang === 'es' ? 'Trabajo que habla por sí solo.' : 'Work that speaks for itself.'}
             </h2>
           </div>
           <div className="flex flex-col">
@@ -265,12 +303,12 @@ export default function App() {
 
         <section id="contact" className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
           <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-8 text-center">
-            <p className="text-sm uppercase tracking-[0.24em] text-white/45">Contacto</p>
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">¿Tenés un proyecto en mente?</h2>
-            <p className="mt-4 text-white/70">Enviar email a hola@tuagencia.com o contactanos por Whatsapp</p>
+            <p className="text-sm uppercase tracking-[0.24em] text-white/45">{lang === 'es' ? 'Contacto' : 'Contact'}</p>
+            {lang === 'es' ? '¿Tenés un proyecto en mente?' : 'Got a project in mind?'}
+            <p className="mt-4 text-white/70">{lang === 'es' ? 'Contanos tu idea. Respondemos en menos de 24 horas.' : 'Tell us your idea. We respond in less than 24 hours.'}</p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
-              <a href="mailto:hola@tuagencia.com" className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-medium text-white transition hover:bg-white/20">Enviar email</a>
-              <a href="https://wa.me/000000000" className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-medium text-white transition hover:bg-white/20">Abrir Whatsapp</a>
+              <a href="mailto:hola@tuagencia.com" className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-medium text-white transition hover:bg-white/20">{lang === 'es' ? 'Enviar email' : 'Send email'}</a>
+              <a href="https://wa.me/000000000" className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-medium text-white transition hover:bg-white/20">{lang === 'es' ? 'Abrir Whatsapp' : 'Open Whatsapp'}</a>
             </div>
           </div>
         </section>
@@ -278,11 +316,20 @@ export default function App() {
       <footer className="border-t border-white/10 px-6 py-8">
   <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-sm text-white/40 sm:flex-row">
     <span className="font-medium tracking-[0.2em] uppercase text-white/60">Polaris</span>
-    <span>© 2025 Polaris Agency. Todos los derechos reservados.</span>
+    <span>{lang === 'es' ? '© 2025 Polaris Agency. Todos los derechos reservados.' : '© 2025 Polaris Agency. All rights reserved.'}</span>
     <div className="flex gap-6">
-      <a href="#services" className="transition hover:text-white/70">Servicios</a>
-      <a href="#process" className="transition hover:text-white/70">Proceso</a>
-      <a href="#contact" className="transition hover:text-white/70">Contacto</a>
+      <a href="#services" className="transition hover:text-white">
+        {lang === 'es' ? 'Servicios' : 'Services'}
+      </a>
+      <a href="#process" className="transition hover:text-white">
+      {lang === 'es' ? 'Proceso' : 'Process'}
+      </a>
+      <a href="#work" className="transition hover:text-white">
+      {lang === 'es' ? 'Proyectos' : 'Projects'}
+      </a>
+      <a href="#contact" className="transition hover:text-white">
+      {lang === 'es' ? 'Contacto' : 'Contact'}
+      </a>
     </div>
   </div>
 </footer>
