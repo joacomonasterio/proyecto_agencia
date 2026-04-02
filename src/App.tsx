@@ -10,6 +10,9 @@ export default function App() {
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+  
+
+  
   const services = [
   {
     title: lang === 'es' ? 'UX/UI Design' : 'UX/UI Design',
@@ -225,7 +228,38 @@ export default function App() {
               </div>
             ))}
           </div>
+          
+
+          <div className="mx-auto mt-16 max-w-5xl">
+            <p className="text-center text-xs uppercase tracking-[0.24em] text-white/30 mb-8">
+              {lang === 'es' ? 'Tecnologías que usamos' : 'Technologies we use'}
+            </p>
+            <div className="flex flex-wrap justify-center items-center gap-8 opacity-50">
+              {[
+                { name: 'React', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+                { name: 'Figma', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg' },
+                { name: 'Node.js', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+                { name: 'Next.js', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' },
+                { name: 'Tailwind', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg' },
+                { name: 'TypeScript', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
+              ].map((tech) => (
+                <div key={tech.name} className="flex flex-col items-center gap-2 group">
+                  <img
+                    src={tech.src}
+                    alt={tech.name}
+                    className="h-10 w-10 grayscale group-hover:grayscale-0 transition duration-300"
+                  />
+                  <span className="text-xs text-white/30 group-hover:text-white/60 transition">
+                    {tech.name}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </section>
+
+        
 
         <section id="process" className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-2 lg:items-center text-center lg:text-left">
@@ -270,7 +304,7 @@ export default function App() {
             {projects.map((project, i) => (
   <div
     key={project.name}
-    className="grid grid-cols-2 gap-8 border-t border-white/10 py-10 last:border-b items-center group hover:bg-white/[0.02] rounded-2xl px-4 transition"
+    className="grid grid-cols-2 gap-8 border-t border-white/10 py-10 last:border-b items-center group hover:bg-white/[0.02] rounded-2xl px-4 transition "
   >
     {/* IZQUIERDA — imagen */}
     <div className="flex justify-center">
@@ -302,7 +336,7 @@ export default function App() {
     </section>
 
         <section id="contact" className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
-          <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-8 text-center">
+          <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-8 text-center ">
             <p className="text-sm uppercase tracking-[0.24em] text-white/45">{lang === 'es' ? 'Contacto' : 'Contact'}</p>
             {lang === 'es' ? '¿Tenés un proyecto en mente?' : 'Got a project in mind?'}
             <p className="mt-4 text-white/70">{lang === 'es' ? 'Contanos tu idea. Respondemos en menos de 24 horas.' : 'Tell us your idea. We respond in less than 24 hours.'}</p>
