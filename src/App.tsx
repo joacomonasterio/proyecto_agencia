@@ -342,7 +342,7 @@ export default function App() {
             <p className="mt-4 text-white/70">{lang === 'es' ? 'Contanos tu idea. Respondemos en menos de 24 horas.' : 'Tell us your idea. We respond in less than 24 hours.'}</p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <a href="mailto:joacomonas@gmail.com" className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-medium text-white transition hover:bg-white/20">{lang === 'es' ? 'Enviar email' : 'Send email'}</a>
-              <a href="https://wa.me/000000000" className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-medium text-white transition hover:bg-white/20">{lang === 'es' ? 'Abrir Whatsapp' : 'Open Whatsapp'}</a>
+              <a href="https://wa.me/+5491166734266" className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-medium text-white transition hover:bg-white/20">{lang === 'es' ? 'Abrir Whatsapp' : 'Open Whatsapp'}</a>
             </div>
           </div>
         </section>
