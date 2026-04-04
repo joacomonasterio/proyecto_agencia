@@ -304,7 +304,7 @@ export default function App() {
             {projects.map((project, i) => (
   <div
     key={project.name}
-    className="grid grid-cols-2 gap-8 border-t border-white/10 py-10 last:border-b items-center group hover:bg-white/[0.02] rounded-2xl px-4 transition "
+    className="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-white/10 py-10 last:border-b items-center group hover:bg-white/[0.02] rounded-2xl px-4 transition"
   >
     {/* IZQUIERDA — imagen */}
     <div className="flex justify-center">
@@ -312,7 +312,7 @@ export default function App() {
         <img
           src={project.image}
           alt={project.name}
-          className="h-96 object-contain drop-shadow-2xl group-hover:scale-105 transition-transform duration-500"
+          className="w-full max-h-[500px] object-contain drop-shadow-2xl group-hover:scale-105 transition-transform duration-500"
         />
       ) : (
         <div className="h-96 w-40 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-white/20 text-sm">
@@ -341,7 +341,7 @@ export default function App() {
             {lang === 'es' ? '¿Tenés un proyecto en mente?' : 'Got a project in mind?'}
             <p className="mt-4 text-white/70">{lang === 'es' ? 'Contanos tu idea. Respondemos en menos de 24 horas.' : 'Tell us your idea. We respond in less than 24 hours.'}</p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
-              <a href="mailto:joacomonas@gmail.com" className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-medium text-white transition hover:bg-white/20">{lang === 'es' ? 'Enviar email' : 'Send email'}</a>
+              <a href="polaris.studio3031@gmail.com" className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-medium text-white transition hover:bg-white/20">{lang === 'es' ? 'Enviar email' : 'Send email'}</a>
               <a href="https://wa.me/+5491166734266" className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-medium text-white transition hover:bg-white/20">{lang === 'es' ? 'Abrir Whatsapp' : 'Open Whatsapp'}</a>
             </div>
           </div>
