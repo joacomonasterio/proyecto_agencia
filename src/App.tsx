@@ -230,7 +230,7 @@ export default function App() {
           </div>
           
 
-          <div className="mx-auto mt-16 max-w-5xl">
+          <div className="mx-auto mt-24 max-w-5xl">
             <p className="text-center text-xs uppercase tracking-[0.24em] text-white/30 mb-8">
               {lang === 'es' ? 'Tecnologías que usamos' : 'Technologies we use'}
             </p>
