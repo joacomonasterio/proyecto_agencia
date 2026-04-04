@@ -81,9 +81,9 @@ export default function App() {
     : 'bg-transparent border-transparent'
     }`}>
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-          <a href="#" className="text-sm font-medium tracking-[0.22em] text-white/70 uppercase hover:text-white transition">
-            Polaris
-          </a>
+          <a href="#" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }} className="text-sm font-semibold tracking-[0.22em] text-white/70 uppercase hover:text-white transition">
+  Polaris
+</a>
           <nav className="hidden gap-8 text-sm text-white/70 md:flex">
   <a href="#services" className="transition hover:text-white">
     {lang === 'es' ? 'Servicios' : 'Services'}
@@ -234,7 +234,7 @@ export default function App() {
             <p className="text-center text-xs uppercase tracking-[0.24em] text-white/30 mb-8">
               {lang === 'es' ? 'Tecnologías que usamos' : 'Technologies we use'}
             </p>
-            <div className="flex flex-wrap justify-center items-center gap-8">
+            <div className="grid grid-cols-3 md:grid-cols-6 gap-8 mx-auto">
               {[
                 { name: 'React', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
                 { name: 'Figma', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg' },
