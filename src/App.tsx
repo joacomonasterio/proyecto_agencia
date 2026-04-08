@@ -250,7 +250,7 @@ export default function App() {
           </div>
 
         </section>
-        <section id="process" className="mx-auto max-w-7xl px-6 py-22 lg:px-8">
+        <section id="process" className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-2 lg:items-center text-center lg:text-left">
             <div>
               <p className="text-sm uppercase tracking-[0.24em] text-white/45">{lang === 'es' ? 'Proceso' : 'Process'}</p>
