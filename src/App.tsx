@@ -15,10 +15,10 @@ export default function App() {
   const [projectType, setProjectType] = useState('')
   const services = [
   {
-    title: lang === 'es' ? 'UX/UI Design' : 'UX/UI Design',
+    title:lang === 'es' ? 'Diseño UX/UI' : 'UX/UI Design',
     description: lang === 'es'
       ? 'Diseñamos interfaces claras, modernas y centradas en conversión para productos digitales, startups y negocios que quieren verse premium.'
-      : 'We design clear, modern interfaces focused on conversion for digital products, startups and businesses that want to look premium.',
+      : 'We design clear, modern interfaces focused on conversions for digital products, startups and businesses that want to look premium.',
   },
   {
     title: lang === 'es' ? 'Desarrollo Web' : 'Web Development',
@@ -30,7 +30,7 @@ export default function App() {
     title: lang === 'es' ? 'Desarrollo de Aplicaciones' : 'App Development',
     description: lang === 'es'
       ? 'Unimos estrategia, diseño y desarrollo para transformar ideas en productos listos para crecer.'
-      : 'We combine strategy, design and development to transform ideas into products ready to scale.',
+      : 'We combine strategy, design, and development to transform ideas into products ready to scale.',
   },
 ]
     const process = [
@@ -132,12 +132,13 @@ export default function App() {
         {menuOpen && (
   <div className="md:hidden absolute left-3 right-3 top-16 z-50 rounded-2xl border border-white/10 bg-neutral-900/95 backdrop-blur-xl p-2 shadow-xl">
     {[
-      { label: 'Servicios', href: '#services' },
-      { label: 'Proceso', href: '#process' },
-      { label: 'Contacto', href: '#contact' },
+      { label: lang === 'es' ? 'Servicios' : 'Services', href: '#services' },
+      { label: lang === 'es' ? 'Proceso' : 'Process', href: '#process' },
+      { label: lang === 'es' ? 'Proyectos' : 'Projects', href: '#work' },
+      { label: lang === 'es' ? 'Contacto' : 'Contact', href: '#contact' },
     ].map((item) => (
         <a
-        key={item.label}
+        key={item.href}
         href={item.href}
         onClick={() => setMenuOpen(false)}
         className="flex items-center justify-between px-4 py-3 rounded-xl text-sm text-white/70 hover:bg-white/5 hover:text-white transition"
@@ -148,15 +149,6 @@ export default function App() {
         </svg>
       </a>
     ))}
-    <div className="mx-4 mt-1 mb-2 pt-2 border-t border-white/10">
-        <a
-        href="#contact"
-        onClick={() => setMenuOpen(false)}
-        className="block w-full text-center rounded-xl bg-white text-neutral-950 text-sm font-semibold py-2.5 transition hover:bg-white/90"
-      >
-        Comenzar proyecto
-      </a>
-    </div>
   </div>
 )}
   
@@ -388,7 +380,7 @@ export default function App() {
     {[
       { value: 'uxui', label: 'UX/UI Design' },
       { value: 'web', label: lang === 'es' ? 'Desarrollo Web' : 'Web Development' },
-      { value: 'app', label: lang === 'es' ? 'Aplicación' : 'Application' },
+      { value: 'app', label: lang === 'es' ? 'Aplicación' : 'App' },
       { value: 'otro', label: lang === 'es' ? 'Otro' : 'Other' },
     ].map((option) => (
       <button
@@ -434,7 +426,7 @@ export default function App() {
       <footer className="border-t border-white/10 px-6 py-8">
   <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-sm text-white/40 sm:flex-row">
     <span className="font-medium tracking-[0.2em] uppercase text-white/60">Polaris</span>
-    <span>{lang === 'es' ? '© 2026 Polaris Studio. Todos los derechos reservados.' : '© 2025 Polaris Agency. All rights reserved.'}</span>
+    <span>{lang === 'es' ? '© 2026 Polaris Studio. Todos los derechos reservados.' : '© 2026 Polaris Studio. All rights reserved.'}</span>
     <div className="flex gap-6 items-center">
   <a href="https://instagram.com/polaris.studio__" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white/70 transition">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
