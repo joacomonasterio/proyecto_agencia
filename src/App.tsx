@@ -5,14 +5,53 @@ export default function App() {
   const [scrollY, setScrollY] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false)
   const [lang, setLang] = useState<'es' | 'en'>('es')
-    useEffect(() => {
+  const [projectType, setProjectType] = useState('')
+  const [formState, setFormState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+
+  useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY)
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
-  
 
-  const [projectType, setProjectType] = useState('')
+  useEffect(() => {
+    const elements = document.querySelectorAll('.animate-on-scroll')
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.1 }
+    )
+    elements.forEach(el => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setFormState('loading')
+    const form = e.currentTarget
+    try {
+      const res = await fetch('https://formspree.io/f/mvzvdzgw', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      })
+      if (res.ok) {
+        setFormState('success')
+        form.reset()
+        setProjectType('')
+      } else {
+        setFormState('error')
+      }
+    } catch {
+      setFormState('error')
+    }
+  }
   const services = [
   {
     title:lang === 'es' ? 'Diseño UX/UI' : 'UX/UI Design',
@@ -42,7 +81,7 @@ export default function App() {
   const projects = [
   {
     name: 'FitTrack',
-    type: lang === 'es' ? 'App · Fitness & Training' : 'App · Fitness & Training',
+    type: 'App · Fitness & Training',
     description: lang === 'es'
       ? 'Aplicación de seguimiento de entrenamiento y progreso fitness.'
       : 'Fitness tracking app for workouts and progress monitoring.',
@@ -82,22 +121,22 @@ export default function App() {
     }`}>
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
           <a href="#" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }} className="text-sm font-semibold tracking-[0.22em] text-white/70 uppercase hover:text-white transition">
-  Polaris
-</a>
+            Polaris
+          </a>
           <nav className="hidden gap-8 text-sm text-white/70 md:flex">
-  <a href="#services" className="transition hover:text-white">
-    {lang === 'es' ? 'Servicios' : 'Services'}
-  </a>
-  <a href="#process" className="transition hover:text-white">
-    {lang === 'es' ? 'Proceso' : 'Process'}
-  </a>
-  <a href="#work" className="transition hover:text-white">
-    {lang === 'es' ? 'Proyectos' : 'Projects'}
-  </a>
-  <a href="#contact" className="transition hover:text-white">
-    {lang === 'es' ? 'Contacto' : 'Contact'}
-  </a>
-</nav>
+          <a href="#services" className="transition hover:text-white">
+            {lang === 'es' ? 'Servicios' : 'Services'}
+          </a>
+          <a href="#process" className="transition hover:text-white">
+            {lang === 'es' ? 'Proceso' : 'Process'}
+          </a>
+          <a href="#work" className="transition hover:text-white">
+            {lang === 'es' ? 'Proyectos' : 'Projects'}
+          </a>
+          <a href="#contact" className="transition hover:text-white">
+            {lang === 'es' ? 'Contacto' : 'Contact'}
+          </a>
+          </nav>
 
         {/* SELECTOR DE IDIOMA */}
         <div className="flex items-center gap-1 text-sm mr-2">
@@ -159,21 +198,21 @@ export default function App() {
   <section className="mx-auto flex max-w-7xl justify-center px-6 pb-20 pt-24 lg:px-8 lg:pb-28 lg:pt-28">
     <div className="mx-auto max-w-3xl text-center">
       
-      <div className="mb-6 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
+      <div className="animate-on-scroll mb-6 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
         {lang === 'es' ? 'UX/UI + Desarrollo Full Stack' : 'UX/UI + Full Stack Development'}
       </div>
 
-      <h1 className="mx-auto max-w-3xl text-5xl font-semibold leading-tight tracking-tight sm:text-6xl lg:text-7xl">
+      <h1 className="animate-on-scroll delay-1 mx-auto max-w-3xl text-5xl font-semibold leading-tight tracking-tight sm:text-6xl lg:text-7xl">
         {lang === 'es' ? 'Somos Polaris.' : 'We are Polaris.'}
       </h1>
 
-      <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/70 sm:text-xl">
+      <p className="animate-on-scroll delay-2 mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/70 sm:text-xl">
         {lang === 'es'
       ?     'Agencia de desarrollo de software que diseña y construye productos digitales.'
       : 'Software agency that designs and builds digital products.'}
       </p>
 
-      <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+      <div className="animate-on-scroll delay-3 mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
         <a
           href="#contact"
           className="rounded-full bg-white px-6 py-3 text-center text-sm font-semibold text-neutral-950 transition hover:scale-[1.02]"
@@ -212,7 +251,7 @@ export default function App() {
             {services.map((service) => (
               <div
                 key={service.title}
-                className="group rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-7 transition hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.06]"
+                className="animate-on-scroll group rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-7 transition hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.06]"
               >
                 <div className="mb-5 h-11 w-11 rounded-2xl bg-gradient-to-br from-fuchsia-500/20 to-cyan-500/20" />
                 <h3 className="text-xl font-semibold">{service.title}</h3>
@@ -269,7 +308,7 @@ export default function App() {
               {process.map((step, index) => (
                 <div
                   key={step}
-                  className="flex items-center gap-5 rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-5"
+                  className="animate-on-scroll flex items-center gap-5 rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-5"
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] text-sm font-semibold text-white/80">
                     0{index + 1}
@@ -293,7 +332,7 @@ export default function App() {
             {projects.map((project, i) => (
   <div
     key={project.name}
-    className="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-white/10 py-10 last:border-b items-center group hover:bg-white/[0.02] rounded-2xl px-4 transition"
+    className="animate-on-scroll grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-white/10 py-10 last:border-b items-center group hover:bg-white/[0.02] rounded-2xl px-4 transition"
   >
     {/* IZQUIERDA — imagen */}
     <div className="flex justify-center">
@@ -337,8 +376,7 @@ export default function App() {
             </div>
 
             <form
-  action="https://formspree.io/f/mvzvdzgw"
-  method="POST"
+  onSubmit={handleSubmit}
   className="mx-auto max-w-2xl"
 >
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
@@ -415,10 +453,26 @@ export default function App() {
 
   <button
     type="submit"
-    className="w-full rounded-full bg-white px-6 py-3 text-sm font-semibold text-neutral-950 transition hover:scale-[1.02]"
+    disabled={formState === 'loading' || formState === 'success'}
+    className="w-full rounded-full bg-white px-6 py-3 text-sm font-semibold text-neutral-950 transition hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
   >
-    {lang === 'es' ? 'Enviar mensaje' : 'Send message'}
+    {formState === 'loading'
+      ? (lang === 'es' ? 'Enviando...' : 'Sending...')
+      : formState === 'success'
+      ? (lang === 'es' ? 'Mensaje enviado' : 'Message sent')
+      : (lang === 'es' ? 'Enviar mensaje' : 'Send message')}
   </button>
+
+  {formState === 'success' && (
+    <p className="mt-4 text-center text-sm text-white/60">
+      {lang === 'es' ? 'Te respondemos en menos de 24 horas.' : 'We\'ll get back to you in less than 24 hours.'}
+    </p>
+  )}
+  {formState === 'error' && (
+    <p className="mt-4 text-center text-sm text-red-400">
+      {lang === 'es' ? 'Hubo un error. Intentá de nuevo.' : 'Something went wrong. Please try again.'}
+    </p>
+  )}
 </form>
   </div>
 </section>
