@@ -1,0 +1,55 @@
+type Lang = 'es' | 'en'
+
+interface Props {
+  lang: Lang
+}
+
+const team = [
+  {
+    name: 'Catalina Armentano',
+    role: { es: 'Diseñadora UX/UI', en: 'UX/UI Designer' },
+    study: { es: 'Diseño Multimedia y de Interacción', en: 'Multimedia & Interaction Design' },
+    image: '/catalina.jpg',
+  },
+  {
+    name: 'Joaquín Monasterio',
+    role: { es: 'Desarrollador Full Stack', en: 'Full Stack Developer' },
+    study: { es: 'Ingeniería en Informática', en: 'Computer Engineering' },
+    image: '/joaquin.jpg',
+  },
+]
+
+export default function About({ lang }: Props) {
+  return (
+    <section id="about" className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+      <div className="mx-auto max-w-2xl text-center mb-12">
+        <p className="text-sm uppercase tracking-[0.24em] text-white/45">
+          {lang === 'es' ? 'Equipo' : 'Team'}
+        </p>
+        <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
+          {lang === 'es' ? 'Las personas detrás de Polaris.' : 'The people behind Polaris.'}
+        </h2>
+      </div>
+
+      <div className="mx-auto max-w-3xl grid grid-cols-1 sm:grid-cols-2 gap-8">
+        {team.map((member) => (
+          <div
+            key={member.name}
+            className="animate-on-scroll flex flex-col items-center text-center rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-8 gap-4"
+          >
+            <img
+              src={member.image}
+              alt={member.name}
+              className="h-24 w-24 rounded-full object-cover border border-white/10"
+            />
+            <div>
+              <h3 className="text-lg font-semibold text-white">{member.name}</h3>
+              <p className="text-sm text-white/50 mt-1">{member.role[lang]}</p>
+              <p className="text-xs text-white/30 mt-1">{member.study[lang]}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}

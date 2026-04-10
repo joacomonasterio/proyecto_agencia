@@ -34,6 +34,9 @@ export default function Header({ lang, setLang }: Props) {
           <a href="#process" className="transition hover:text-white">
             {lang === 'es' ? 'Proceso' : 'Process'}
           </a>
+          <a href="#about" className="transition hover:text-white">
+            {lang === 'es' ? 'Equipo' : 'Team'}
+          </a>
           <a href="#work" className="transition hover:text-white">
             {lang === 'es' ? 'Proyectos' : 'Projects'}
           </a>
@@ -74,6 +77,7 @@ export default function Header({ lang, setLang }: Props) {
           {[
             { label: lang === 'es' ? 'Servicios' : 'Services', href: '#services' },
             { label: lang === 'es' ? 'Proceso' : 'Process', href: '#process' },
+            { label: lang === 'es' ? 'Equipo' : 'Team', href: '#about' },
             { label: lang === 'es' ? 'Proyectos' : 'Projects', href: '#work' },
             { label: lang === 'es' ? 'Contacto' : 'Contact', href: '#contact' },
           ].map((item) => (
