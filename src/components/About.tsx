@@ -10,12 +10,14 @@ const team = [
     role: { es: 'Diseñadora UX/UI', en: 'UX/UI Designer' },
     study: { es: 'Diseño Multimedia y de Interacción', en: 'Multimedia & Interaction Design' },
     image: '/catalina.jpg',
+    objectPosition: 'center 30%',
   },
   {
     name: 'Joaquín Monasterio',
     role: { es: 'Desarrollador Full Stack', en: 'Full Stack Developer' },
     study: { es: 'Ingeniería en Informática', en: 'Computer Engineering' },
     image: '/joaquin.jpg',
+    objectPosition: 'center',
   },
 ]
 
@@ -41,6 +43,7 @@ export default function About({ lang }: Props) {
               src={member.image}
               alt={member.name}
               className="h-24 w-24 rounded-full object-cover border border-white/10"
+              style={{ objectPosition: member.objectPosition }}
             />
             <div>
               <h3 className="text-lg font-semibold text-white">{member.name}</h3>
