@@ -49,7 +49,7 @@ export default function App() {
               ? ['Diseño estratégico', 'Desarrollo moderno', 'Responsive', 'Optimización visual']
               : ['Strategic design', 'Modern development', 'Responsive', 'Visual optimization']
             ).map((item) => (
-              <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-5 text-sm text-white/70">
+              <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-5 text-sm text-white/70 text-center">
                 {item}
               </div>
             ))}
